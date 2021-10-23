@@ -1,0 +1,9 @@
+{
+  "name": "drones-in-tel-aviv",
+  "version": "0.0.0",
+  "description": "DronesInTelAviv",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  }
+}

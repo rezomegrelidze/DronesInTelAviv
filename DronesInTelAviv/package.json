@@ -1,9 +1,14 @@
 {
   "name": "drones-in-tel-aviv",
   "version": "0.0.0",
+  "type" :  "module", 
   "description": "DronesInTelAviv",
   "main": "app.js",
   "author": {
     "name": ""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8"
   }
 }

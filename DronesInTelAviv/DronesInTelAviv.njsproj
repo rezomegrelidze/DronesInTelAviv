@@ -28,12 +28,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="AltitudeManager.js" />
     <Content Include="app.js" />
-    <Content Include="ControlSystem.js" />
-    <Content Include="Drone.js" />
     <Content Include="package.json" />
-    <Content Include="Random.js" />
     <Content Include="README.md" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

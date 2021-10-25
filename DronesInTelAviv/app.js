@@ -32,7 +32,7 @@ export class Simulation {
     constructor() {
 
     }
-
+    
     start() {
         let controlSystem = new ControlSystem(15, 20);
 

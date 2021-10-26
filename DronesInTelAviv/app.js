@@ -29,7 +29,7 @@ function randomNext(min, max) {
 }
 
 
-export class AltitudeManager {
+class AltitudeManager {
     controlSystem;
 
     constructor(controlSystem) {
@@ -50,7 +50,7 @@ export class AltitudeManager {
     }
 }
 
-export class Drone {
+class Drone {
     id;
     initialGroundPos;
     state = {
@@ -128,13 +128,16 @@ export class Drone {
         }
         else if (this.position.y === 0 && this.position.x === this.destination) {
             // landed
-            handleLanding();
+            this.handleLanding();
         } else {
-            this.position.x += this.velocity;
+            if (this.destination - this.position.x < 1000)
+                this.position.x = this.destination;
+            else
+                this.position.x += this.velocity;
             // move towards the destination
         }
 
-        if (this.systemHasCollisions()) {
+        if (this.droneCollides()) {
             this.position = positionBackup;
         }
     }
@@ -142,15 +145,18 @@ export class Drone {
     handleLanding() {
         console.log(`Drone number ${this.id} has landed`);
         this.state.onGround = true;
-        this.hasPassanger = false;
+        this.hasPassenger = false;
         this.initialGroundPos = this.position.x;
         this.altitude = undefined;
         this.state.timeUntilSomeoneReaches = this.controlSystem.getTimeUntilSomeoneReaches();
+        this.state.timeUntilLanding = 0;
+        this.destination = this.position.x + this.controlSystem.getDestination();
         // TODO: research why landing doesn't work
     }
 
-    systemHasCollisions() {
-        return this.controlSystem.drones.some(d => d.position.x === this.position.x && d.position.y === this.position.y);
+    droneCollides() {
+        let restDrones = this.controlSystem.drones.filter(d => d.id !== this.id);
+        return restDrones.some(d => d.position.x === this.position.x && d.position.y === this.position.y);
     }
 
     // returns time in minutes
@@ -183,7 +189,7 @@ export class Drone {
 
 
 
-export class ControlSystem {
+class ControlSystem {
     altitudes = [];
     drones = [];
 
@@ -211,9 +217,14 @@ export class ControlSystem {
             const drone = new Drone(i,this);
             this.drones.push(drone);
             drone.state.timeUntilSomeoneReaches = this.getTimeUntilSomeoneReaches();
-            drone.destination = randomNext(1, 6) * 1000;
+            drone.destination = this.getDestination();
         }
     }
+
+    getDestination() {
+        return randomNext(1, 6) * 1000;
+    }
+
 
     assignDronesInitialGroundPositions() {
         let position = 0;
@@ -235,7 +246,7 @@ export class ControlSystem {
     }
 }
 
-export class Simulation {
+class Simulation {
     constructor() {
 
     }

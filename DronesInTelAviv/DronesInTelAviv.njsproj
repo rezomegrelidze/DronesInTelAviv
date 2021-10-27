@@ -28,7 +28,12 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="altitudeManager.js" />
     <Content Include="app.js" />
+    <Content Include="controlSystem.js" />
+    <Content Include="drone.js" />
+    <Content Include="droneStateManager.js" />
+    <Content Include="flightManager.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
